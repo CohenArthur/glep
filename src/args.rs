@@ -2,7 +2,7 @@ use std::process;
 
 fn print_help() {
     println!(
-    "glep: Simple Line Pattern matching
+        "glep: Simple Line Pattern matching
     Usage:
        glep file pattern line [lines]
 
@@ -21,11 +21,9 @@ fn print_help() {
     );
 }
 
-pub struct GlepArgs
-{
+pub struct GlepArgs {
     pub filename: String,
     pub pattern: String,
-    pub first_line: u32,
     pub lines: Vec<u32>,
 }
 
@@ -37,15 +35,14 @@ pub fn get_args(cli_args: &Vec<String>) -> GlepArgs {
 
     let mut extra_lines = Vec::new();
 
-    for line in cli_args[4..].iter() {
+    cli_args[3..].iter().for_each(|line| {
         extra_lines.push(line.parse::<u32>().unwrap());
-    }
+    });
 
     let args = GlepArgs {
-        filename : cli_args[1].clone(),
-        pattern : cli_args[2].clone(),
-        first_line : cli_args[3].parse::<u32>().unwrap(),
-        lines : extra_lines,
+        filename: cli_args[1].clone(),
+        pattern: cli_args[2].clone(),
+        lines: extra_lines,
     };
 
     return args;
