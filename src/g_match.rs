@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{self, BufRead};
+use regex::Regex;
 
 use crate::g_args::GlepArgs;
 
@@ -23,5 +24,13 @@ fn get_lines(args: &GlepArgs) -> Vec<String> {
 }
 
 pub fn is_full_match(args: GlepArgs) -> bool {
-    return get_lines(&args).len() == 0;
+    let lines = get_lines(&args);
+
+    let re = Regex::new(&args.pattern).unwrap();
+
+    let captures = re.captures(&lines[args.lines[0]]).unwrap();
+
+    dbg!(captures);
+
+    return true;
 }
