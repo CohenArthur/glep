@@ -23,6 +23,7 @@ fn print_help() {
 
 pub struct GlepArgs {
     pub filename: String,
+    pub is_stdin: bool,
     pub pattern: String,
     pub lines: Vec<u32>,
 }
@@ -37,10 +38,12 @@ pub fn get_args(cli_args: &Vec<String>) -> GlepArgs {
 
     cli_args[3..].iter().for_each(|line| {
         extra_lines.push(line.parse::<u32>().unwrap());
+        // FIXME: Add better error handling
     });
 
     let args = GlepArgs {
         filename: cli_args[1].clone(),
+        is_stdin: if cli_args[1] == "-" { true } else { false },
         pattern: cli_args[2].clone(),
         lines: extra_lines,
     };
