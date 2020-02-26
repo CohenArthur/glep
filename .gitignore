@@ -1,0 +1,8 @@
+# Ignore rust build files
+
+/target
+**/*.rs.bk
+
+# Ignore tags
+
+tags
