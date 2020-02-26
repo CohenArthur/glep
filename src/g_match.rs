@@ -1,6 +1,6 @@
+use regex::Regex;
 use std::fs::File;
 use std::io::{self, BufRead};
-use regex::Regex;
 
 use crate::g_args::GlepArgs;
 
@@ -30,7 +30,7 @@ pub fn is_full_match(args: GlepArgs) -> bool {
 
     let captures = re.captures(&lines[args.lines[0]]).unwrap();
 
-    dbg!(captures);
+    dbg!(&captures[0]);
 
     return true;
 }
