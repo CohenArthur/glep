@@ -26,6 +26,7 @@ pub struct GlepArgs
     pub filename: String,
     pub pattern: String,
     pub first_line: u32,
+    pub lines: Vec<u32>,
 }
 
 pub fn get_args(cli_args: &Vec<String>) -> GlepArgs {
@@ -34,10 +35,17 @@ pub fn get_args(cli_args: &Vec<String>) -> GlepArgs {
         process::exit(1);
     }
 
+    let mut extra_lines = Vec::new();
+
+    for line in cli_args[4..].iter() {
+        extra_lines.push(line.parse::<u32>().unwrap());
+    }
+
     let args = GlepArgs {
         filename : cli_args[1].clone(),
         pattern : cli_args[2].clone(),
         first_line : cli_args[3].parse::<u32>().unwrap(),
+        lines : extra_lines,
     };
 
     return args;

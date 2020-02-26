@@ -9,4 +9,5 @@ fn main() {
     dbg!(args.filename);
     dbg!(args.pattern);
     dbg!(args.first_line);
+    dbg!(args.lines);
 }
