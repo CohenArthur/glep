@@ -23,14 +23,20 @@ fn get_lines(args: &GlepArgs) -> Vec<String> {
     lines
 }
 
-pub fn is_full_match(args: GlepArgs) -> bool {
+pub fn is_full_match(mut args: GlepArgs) -> bool {
     let lines = get_lines(&args);
 
     let re = Regex::new(&args.pattern).unwrap();
 
     let captures = re.captures(&lines[args.lines[0]]).unwrap();
 
-    dbg!(&captures[0]);
+    args.lines.remove(0);
+
+    for idx in args.lines {
+        if !lines[idx].contains(&captures[0]) {
+            return false;
+        }
+    }
 
     return true;
 }
